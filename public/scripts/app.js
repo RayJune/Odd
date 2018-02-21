@@ -2,45 +2,68 @@
 
 console.log('App is runing');
 
-// JSX JavaScript XML
-// error: var templete = <h1>This is JSX from app.js hahaha</h1><p>This is some info</p>;
-// one root element(wrapper div), one love :)
+var app = {
+  title: 'Indecision App',
+  subtitle: 'You Never Try, You Never Know',
+  item1: 'item1',
+  item2: 'item2'
+};
+
 var templete = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Another RayJune'
+    app.title
   ),
   React.createElement(
     'p',
     null,
-    'motto: Gentleman is gentle.'
+    app.subtitle
   ),
   React.createElement(
-    'p',
-    null,
-    'Hobby(except coding)'
-  ),
-  React.createElement(
-    'ul',
+    'ol',
     null,
     React.createElement(
       'li',
       null,
-      'Football'
+      app.item1
     ),
     React.createElement(
       'li',
       null,
-      'Man UTD'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'Zlatan 10'
+      app.item2
     )
+  )
+);
+
+// JSX: JavaScript XML
+var user = {
+  name: 'Another RayJune',
+  age: '21',
+  location: 'Silicon Valley'
+};
+
+var templete2 = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    user.name
+  ),
+  React.createElement(
+    'p',
+    null,
+    'age: ',
+    user.age
+  ),
+  React.createElement(
+    'p',
+    null,
+    'location: ',
+    user.location.toUpperCase()
   )
 );
 var appRoot = document.getElementById('app');
