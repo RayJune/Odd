@@ -1,101 +1,86 @@
 'use strict';
 
+// React: A JavaScript **library for building user interfaces**
 // JSX: JavaScript XML
 
 var app = {
   title: 'Indecision App',
   subtitle: 'You Never Try, You Never Know',
-  options: ['one', 'two']
+  options: []
 };
-var templete = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    app.title
-  ),
-  app.subtitle && React.createElement(
-    'p',
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    'p',
-    null,
-    app.options.length > 0 ? 'Here are your options' : 'No options'
-  ),
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'item1'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'item2'
-    )
-  )
-);
-
-/* cutting line */
-
-var count = 0;
-// count change, but h1's count not change because:
-// JSX does not have built in data binding
-var addOne = function addOne() {
-  count += 1;
-  // punchline:
-  renderCounterApp();
-};
-var minusOne = function minusOne() {
-  count -= 1;
-  renderCounterApp();
-};
-var reset = function reset() {
-  count = 0;
-  renderCounterApp();
-};
-
 var appRoot = document.getElementById('app');;
 
-// imitate/illustrate how React does:
-// the count variable is changing but after it changes we never render
-var renderCounterApp = function renderCounterApp() {
-  var templete2 = React.createElement(
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault(); // prevent form's default action: refresh the whole page
+  var option = e.target.elements.option.value;
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = ''; // reset input
+  }
+  render();
+};
+
+var onClear = function onClear() {
+  app.options = [];
+  render();
+};
+
+var render = function render() {
+  var templete = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count: ',
-      count
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      'p',
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length > 0 ? 'Here are your options' : 'No options'
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length
     ),
     React.createElement(
       'button',
-      { onClick: addOne },
-      '+1'
+      { onClick: onClear },
+      'Clear'
     ),
     React.createElement(
-      'button',
-      { onClick: minusOne },
-      '-1'
+      'ol',
+      null,
+      React.createElement(
+        'li',
+        null,
+        'item1'
+      ),
+      React.createElement(
+        'li',
+        null,
+        'item2'
+      )
     ),
     React.createElement(
-      'button',
-      { onClick: reset },
-      'reset'
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
+      )
     )
   );
 
-  ReactDOM.render(templete2, appRoot);
-  // Just part of the one needs to be replaced, this is React's super-efficient virtual-dom
-
-  // This means that: we can rerender our app updating it without worrying about slowing down the user or wasting a ton of resources and creating a large buggy app instead.
+  ReactDOM.render(templete, appRoot);
 };
-// So we're able to reate a little JSX app that has real time data binding as that count changes
-// We're able to reflect those changes by rerendering the app 
-renderCounterApp();
+
+render();
