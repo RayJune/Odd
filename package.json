@@ -1,0 +1,16 @@
+{
+  "name": "amazing-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:RayJune/amazing-react.git",
+  "author": "RayJune",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server public/",
+    "babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+  },
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  }
+}
