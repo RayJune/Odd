@@ -41,71 +41,61 @@ var templete = React.createElement(
   )
 );
 
+/* cutting line */
+
 var count = 0;
 // count change, but h1's count not change because:
 // JSX does not have built in data binding
 var addOne = function addOne() {
   count += 1;
-  console.log(count);
-  console.log('add one');
+  // punchline:
+  renderCounterApp();
 };
 var minusOne = function minusOne() {
-  console.log('minus one');
+  count -= 1;
+  renderCounterApp();
 };
 var reset = function reset() {
-  console.log('reset');
+  count = 0;
+  renderCounterApp();
 };
 
-// code_section_1
-var templete1 = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
+var appRoot = document.getElementById('app');;
+
+// imitate/illustrate how React does:
+// the count variable is changing but after it changes we never render
+var renderCounterApp = function renderCounterApp() {
+  var templete2 = React.createElement(
+    'div',
     null,
-    'Count: ',
-    count
-  ),
-  React.createElement(
-    'button',
-    { onClick: addOne },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: minusOne },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: reset },
-    'reset'
-  )
-);
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minusOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'reset'
+    )
+  );
 
-/* 
-  this templete1 expression runs before anything is rendered to the screen
-  Remember we don't render a single thing to the screen until we call react-done render
-  So what are these variables equal before anything is rendered to the screen
-*/
+  ReactDOM.render(templete2, appRoot);
+  // Just part of the one needs to be replaced, this is React's super-efficient virtual-dom
 
-/* 
-  There's no way one of our event handlers fired because the buttons haven't even been rendered.
-  So when we create JSX, 
-  all the data that gets used inside of it that 
-  happens at the time the code runs
-*/
-
-// So the count was 0 because it is 0 when this first run
-
-// how to fix that?
-// we just need to rerun code_section_1 & code_section_2 when data changes
-
-/*
-  When our data changes later on we're going to use react components to do that
-  But it a little difficult for now(my react skil level).
-*/
-
-// code_section_2
-var appRoot = document.getElementById('app');
-ReactDOM.render(templete1, appRoot);
+  // This means that: we can rerender our app updating it without worrying about slowing down the user or wasting a ton of resources and creating a large buggy app instead.
+};
+// So we're able to reate a little JSX app that has real time data binding as that count changes
+// We're able to reflect those changes by rerendering the app 
+renderCounterApp();
