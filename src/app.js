@@ -1,3 +1,16 @@
+class OddApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header /> 
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    );
+  }
+}
+
 class Header extends React.Component {
   // React.Component requie 1 method to be defined: render
   render() {
@@ -25,8 +38,17 @@ class Options extends React.Component {
     return (
       <div>
         Options component
+        <Option /> {/* same as <Option></Option> */}
       </div>
     );
+  }
+}
+
+class Option extends React.Component {
+  render() {
+    return (
+      <p>Option component</p>
+    )
   }
 }
 
@@ -40,13 +62,4 @@ class AddOption extends React.Component {
   }
 }
 
-const rayjune = (
-  <div>
-    <Header /> 
-    <Action />
-    <Options />
-    <AddOption />
-  </div>
-);
-
-ReactDOM.render(rayjune, document.getElementById('app'));
+ReactDOM.render(<OddApp />, document.getElementById('app'));
