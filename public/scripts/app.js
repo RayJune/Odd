@@ -88,4 +88,81 @@ var render = function render() {
   ReactDOM.render(templete, appRoot);
 };
 
-render();
+// render();
+
+/* cutting line */
+
+var onShow = function onShow(_ref) {
+  var target = _ref.target;
+
+  console.dir(document.getElementById('sentence'));
+  if (target.textContent != 'Show details') {
+    target.textContent = 'Show details';
+    document.getElementById('sentence').style.display = 'none';
+  } else {
+    target.textContent = 'Hide details';
+    document.querySelector('#sentence').style.display = 'block';
+  }
+  render1();
+};
+
+var render1 = function render1() {
+  var templete1 = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Visibility Toggle'
+    ),
+    React.createElement(
+      'button',
+      { onClick: onShow },
+      'Show details'
+    ),
+    React.createElement(
+      'p',
+      { id: 'sentence' },
+      'Yestday You Said Tomorrow'
+    )
+  );
+
+  ReactDOM.render(templete1, appRoot);
+};
+
+// render1();
+
+/* cutting line */
+
+var visibility = false;
+
+var toggleVisibility = function toggleVisibility() {
+  visibility = !visibility;
+  render2();
+};
+
+var render2 = function render2() {
+  var templete2 = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Visibility Toggle'
+    ),
+    React.createElement(
+      'button',
+      { onClick: toggleVisibility },
+      visibility ? 'Hide details' : 'Show details'
+    ),
+    visibility && React.createElement(
+      'p',
+      null,
+      'Yestday You Said Tomorrow'
+    )
+  );
+
+  ReactDOM.render(templete2, appRoot);
+};
+
+render2();
