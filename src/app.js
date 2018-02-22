@@ -1,3 +1,24 @@
+/* 
+  how state is going to fit into apps:
+  
+  component state allows our components to manage some data
+
+  So just think about an object with various key-value pairs , and when 
+  that data changes the component will automatically rerender to reflect those changes
+*/
+
+/*
+  All we have to do is manipulate the data and the component is going to take care of rerendering itself.
+*/
+
+/*
+  1. Setup default state object
+  2. Component rendered with default state values
+  3. Change state based on event
+  4. Component re-rendered using new states
+  5. start at 3 again
+*/
+
 class OddApp extends React.Component {
   render() {
     const title = '偶得';
@@ -44,7 +65,8 @@ class Action extends React.Component {
 
 class Options1 extends React.Component {
   handleClear() {
-    console.log(this.props.options); // error, because the render produce the object, not Options it self.
+    console.log(this.props.options); 
+    // error, because the render produce the object, not Options it self.
     // so we use this.handleClear.bind(this) to fix it
   }
   render() {
