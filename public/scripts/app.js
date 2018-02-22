@@ -1,168 +1,127 @@
 'use strict';
 
-// React: A JavaScript **library for building user interfaces**
-// JSX: JavaScript XML
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var app = {
-  title: 'Indecision App',
-  subtitle: 'You Never Try, You Never Know',
-  options: []
-};
-var appRoot = document.getElementById('app');;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var onMakeDecision = function onMakeDecision() {
-  var randomNum = Math.floor(Math.random() * app.options.length);
-  var option = app.options[randomNum];
-  console.log(option);
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-var onClear = function onClear() {
-  app.options = [];
-  render();
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault(); // prevent form's default action: refresh the whole page
+var Header = function (_React$Component) {
+  _inherits(Header, _React$Component);
 
-  var option = e.target.elements.option.value;
+  function Header() {
+    _classCallCheck(this, Header);
 
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = ''; // reset input
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
   }
-  render();
-};
 
-var render = function render() {
-  var templete = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      app.title
-    ),
-    app.subtitle && React.createElement(
-      'p',
-      null,
-      app.subtitle
-    ),
-    React.createElement(
-      'p',
-      null,
-      app.options.length > 0 ? 'Here are your options' : 'No options'
-    ),
-    React.createElement(
-      'button',
-      { disabled: app.options.length === 0, onClick: onMakeDecision },
-      'What should I do?'
-    ),
-    React.createElement(
-      'button',
-      { onClick: onClear },
-      'Clear'
-    ),
-    React.createElement(
-      'ol',
-      null,
-      app.options.map(function (option) {
-        return React.createElement(
-          'li',
-          { key: option },
-          option
-        );
-      })
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', { type: 'text', name: 'option' }),
-      React.createElement(
-        'button',
+  _createClass(Header, [{
+    key: 'render',
+
+    // React.Component requie 1 method to be defined: render
+    value: function render() {
+      return React.createElement(
+        'div',
         null,
-        'Add Option'
-      )
-    )
-  );
+        React.createElement(
+          'h1',
+          null,
+          '\u6587\u7AE0\u672C\u5929\u6210\uFF0C\u5999\u624B\u5076\u5F97\u4E4B'
+        ),
+        React.createElement(
+          'h2',
+          null,
+          '\u4EE3\u7801\u5373\u8BD7\u6B4C'
+        )
+      );
+    }
+  }]);
 
-  ReactDOM.render(templete, appRoot);
-};
+  return Header;
+}(React.Component);
 
-// render();
+var Action = function (_React$Component2) {
+  _inherits(Action, _React$Component2);
 
-/* cutting line */
+  function Action() {
+    _classCallCheck(this, Action);
 
-var onShow = function onShow(_ref) {
-  var target = _ref.target;
-
-  console.dir(document.getElementById('sentence'));
-  if (target.textContent != 'Show details') {
-    target.textContent = 'Show details';
-    document.getElementById('sentence').style.display = 'none';
-  } else {
-    target.textContent = 'Hide details';
-    document.querySelector('#sentence').style.display = 'block';
+    return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
   }
-  render1();
-};
 
-var render1 = function render1() {
-  var templete1 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility Toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: onShow },
-      'Show details'
-    ),
-    React.createElement(
-      'p',
-      { id: 'sentence' },
-      'Yestday You Said Tomorrow'
-    )
-  );
+  _createClass(Action, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'button',
+          null,
+          'What should I do?'
+        )
+      );
+    }
+  }]);
 
-  ReactDOM.render(templete1, appRoot);
-};
+  return Action;
+}(React.Component);
 
-// render1();
+var Options = function (_React$Component3) {
+  _inherits(Options, _React$Component3);
 
-/* cutting line */
+  function Options() {
+    _classCallCheck(this, Options);
 
-var visibility = false;
+    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+  }
 
-var toggleVisibility = function toggleVisibility() {
-  visibility = !visibility;
-  render2();
-};
+  _createClass(Options, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'Options component'
+      );
+    }
+  }]);
 
-var render2 = function render2() {
-  var templete2 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility Toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: toggleVisibility },
-      visibility ? 'Hide details' : 'Show details'
-    ),
-    visibility && React.createElement(
-      'p',
-      null,
-      'Yestday You Said Tomorrow'
-    )
-  );
+  return Options;
+}(React.Component);
 
-  ReactDOM.render(templete2, appRoot);
-};
+var AddOption = function (_React$Component4) {
+  _inherits(AddOption, _React$Component4);
 
-render2();
+  function AddOption() {
+    _classCallCheck(this, AddOption);
+
+    return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+  }
+
+  _createClass(AddOption, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'AddOption component'
+      );
+    }
+  }]);
+
+  return AddOption;
+}(React.Component);
+
+var rayjune = React.createElement(
+  'div',
+  null,
+  React.createElement(Header, null),
+  React.createElement(Action, null),
+  React.createElement(Options, null),
+  React.createElement(AddOption, null)
+);
+
+ReactDOM.render(rayjune, document.getElementById('app'));
