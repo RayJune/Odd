@@ -1,10 +1,14 @@
 class OddApp extends React.Component {
   render() {
+    const title = '文章本天成，妙手偶得之';
+    const subtitle = '代码即诗歌';
+    const options = ['thing 1', 'thing 2', 'thing 3'];
+
     return (
       <div>
-        <Header /> 
+        <Header title={title} subtitle={subtitle}/> 
         <Action />
-        <Options />
+        <Options options={options}/>
         <AddOption />
       </div>
     );
@@ -16,8 +20,8 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        <h1>文章本天成，妙手偶得之</h1>
-        <h2>代码即诗歌</h2>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
       </div>
     );
   }
@@ -37,8 +41,11 @@ class Options extends React.Component {
   render() {
     return (
       <div>
-        Options component
-        <Option /> {/* same as <Option></Option> */}
+        {
+          this.props.options.map((option) => {
+            return <Option key={option} optionText={option}/>
+          })
+        }
       </div>
     );
   }
@@ -47,7 +54,7 @@ class Options extends React.Component {
 class Option extends React.Component {
   render() {
     return (
-      <p>Option component</p>
+      <p>option: {this.props.optionText}</p>
     )
   }
 }

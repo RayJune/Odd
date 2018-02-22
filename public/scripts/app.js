@@ -20,12 +20,16 @@ var OddApp = function (_React$Component) {
   _createClass(OddApp, [{
     key: 'render',
     value: function render() {
+      var title = '文章本天成，妙手偶得之';
+      var subtitle = '代码即诗歌';
+      var options = ['thing 1', 'thing 2', 'thing 3'];
+
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, null),
+        React.createElement(Header, { title: title, subtitle: subtitle }),
         React.createElement(Action, null),
-        React.createElement(Options, null),
+        React.createElement(Options, { options: options }),
         React.createElement(AddOption, null)
       );
     }
@@ -54,12 +58,12 @@ var Header = function (_React$Component2) {
         React.createElement(
           'h1',
           null,
-          '\u6587\u7AE0\u672C\u5929\u6210\uFF0C\u5999\u624B\u5076\u5F97\u4E4B'
+          this.props.title
         ),
         React.createElement(
           'h2',
           null,
-          '\u4EE3\u7801\u5373\u8BD7\u6B4C'
+          this.props.subtitle
         )
       );
     }
@@ -110,9 +114,9 @@ var Options = function (_React$Component4) {
       return React.createElement(
         'div',
         null,
-        'Options component',
-        React.createElement(Option, null),
-        ' '
+        this.props.options.map(function (option) {
+          return React.createElement(Option, { key: option, optionText: option });
+        })
       );
     }
   }]);
@@ -135,7 +139,8 @@ var Option = function (_React$Component5) {
       return React.createElement(
         'p',
         null,
-        'Option component'
+        'option: ',
+        this.props.optionText
       );
     }
   }]);
