@@ -20,8 +20,8 @@ var OddApp = function (_React$Component) {
   _createClass(OddApp, [{
     key: 'render',
     value: function render() {
-      var title = '文章本天成，妙手偶得之';
-      var subtitle = '代码即诗歌';
+      var title = '偶得';
+      var subtitle = '文章本天成，妙手偶得之';
       var options = ['thing 1', 'thing 2', 'thing 3'];
 
       return React.createElement(
@@ -29,7 +29,7 @@ var OddApp = function (_React$Component) {
         null,
         React.createElement(Header, { title: title, subtitle: subtitle }),
         React.createElement(Action, null),
-        React.createElement(Options, { options: options }),
+        React.createElement(Options2, { options: options }),
         React.createElement(AddOption, null)
       );
     }
@@ -95,7 +95,7 @@ var Action = function (_React$Component3) {
         React.createElement(
           'button',
           { onClick: this.handlePick },
-          'What should I do?'
+          '\u4F55\u4E0D\u8BD5\u4E00\u628A\u624B\u6C14\uFF1F'
         )
       );
     }
@@ -104,19 +104,22 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-var Options = function (_React$Component4) {
-  _inherits(Options, _React$Component4);
+/* cutting line */
 
-  function Options() {
-    _classCallCheck(this, Options);
+var Options1 = function (_React$Component4) {
+  _inherits(Options1, _React$Component4);
 
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+  function Options1() {
+    _classCallCheck(this, Options1);
+
+    return _possibleConstructorReturn(this, (Options1.__proto__ || Object.getPrototypeOf(Options1)).apply(this, arguments));
   }
 
-  _createClass(Options, [{
+  _createClass(Options1, [{
     key: 'handleClear',
     value: function handleClear() {
-      console.log('clear');
+      console.log(this.props.options); // error, because the render produce the object, not Options it self.
+      // so we use this.handleClear.bind(this) to fix it
     }
   }, {
     key: 'render',
@@ -126,8 +129,8 @@ var Options = function (_React$Component4) {
         null,
         React.createElement(
           'button',
-          { onClick: this.handleClear },
-          'Clear'
+          { onClick: this.handleClear.bind(this) },
+          '\u6E05\u7A7A'
         ),
         this.props.options.map(function (option) {
           return React.createElement(Option, { key: option, optionText: option });
@@ -136,11 +139,60 @@ var Options = function (_React$Component4) {
     }
   }]);
 
-  return Options;
+  return Options1;
 }(React.Component);
 
-var Option = function (_React$Component5) {
-  _inherits(Option, _React$Component5);
+/*
+  but the Options1's solution is expensive for every render it will call bind
+  as our components rerender more and more often they can get a little bit expensive
+  It requires us to do a bit more work than is really necessary
+  So I'm going to do is remove this taht's actually going to once again break the program.
+  And what I'm going to do is override the constructor function for react component.
+*/
+
+var Options2 = function (_React$Component5) {
+  _inherits(Options2, _React$Component5);
+
+  function Options2(props) {
+    _classCallCheck(this, Options2);
+
+    var _this5 = _possibleConstructorReturn(this, (Options2.__proto__ || Object.getPrototypeOf(Options2)).call(this, props));
+
+    _this5.handleClear = _this5.handleClear.bind(_this5);
+    // It does not need to get rebound every single time the component renders which is way more efficient
+    return _this5;
+  }
+
+  _createClass(Options2, [{
+    key: 'handleClear',
+    value: function handleClear() {
+      console.log(this.props.options);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'button',
+          { onClick: this.handleClear.bind(this) },
+          '\u6E05\u7A7A'
+        ),
+        this.props.options.map(function (option) {
+          return React.createElement(Option, { key: option, optionText: option });
+        })
+      );
+    }
+  }]);
+
+  return Options2;
+}(React.Component);
+
+/* cutting line */
+
+var Option = function (_React$Component6) {
+  _inherits(Option, _React$Component6);
 
   function Option() {
     _classCallCheck(this, Option);
@@ -163,8 +215,8 @@ var Option = function (_React$Component5) {
   return Option;
 }(React.Component);
 
-var AddOption = function (_React$Component6) {
-  _inherits(AddOption, _React$Component6);
+var AddOption = function (_React$Component7) {
+  _inherits(AddOption, _React$Component7);
 
   function AddOption() {
     _classCallCheck(this, AddOption);
@@ -190,11 +242,11 @@ var AddOption = function (_React$Component6) {
       return React.createElement(
         'form',
         { onSubmit: this.handleAddOption },
-        React.createElement('input', { type: 'text', name: 'option' }),
+        React.createElement('input', { type: 'text', name: 'option', placeholder: '\u5B58\u653E\u4E00\u4E2A\u5C0F\u5FC3\u613F\u628A\uFF1A\uFF09' }),
         React.createElement(
           'button',
           null,
-          'Add Option'
+          '\u6DFB\u52A0'
         )
       );
     }
