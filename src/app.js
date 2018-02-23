@@ -3,17 +3,19 @@ class OddApp extends React.Component {
     super(props);
     this.handleClearOptions = this.handleClearOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
       options: props.options
     };
   }
   handleClearOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      };
-    });
+    this.setState(() => ({ options: [] }));
+  }
+  handleDeleteOption(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => optionToRemove !== option)
+    }));
   }
   handlePick() {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
@@ -27,11 +29,9 @@ class OddApp extends React.Component {
       return 'This option already exists';
     }
 
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat(option)
-      }
-    })
+    this.setState((prevState) => ({ 
+      options: prevState.options.concat(option) }
+    ));
   }
   render() {
     const subtitle = '文章本天成，妙手偶得之';
@@ -46,6 +46,7 @@ class OddApp extends React.Component {
         <Options 
           options={this.state.options}
           handleClearOptions={this.handleClearOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption 
           handleAddOption={this.handleAddOption}
@@ -90,11 +91,13 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleClearOptions}>Clear</button>
-      {
-        props.options.map((option) => {
-            return <Option key={option} optionText={option} />
-        })
-      }
+      {props.options.map((option) => (
+        <Option 
+          key={option} 
+          optionText={option}
+          handleDeleteOption={props.handleDeleteOption}
+        />
+      ))}
     </div>
   );
 };
@@ -103,6 +106,13 @@ const Option = (props) => {
   return (
     <div>
       {props.optionText}
+      <button 
+        onClick={() => {
+          props.handleDeleteOption(props.optionText)
+        }}
+      >
+        remove
+      </button>
     </div>
   );
 };
@@ -113,7 +123,7 @@ class AddOption extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
       error: undefined
-    }
+    };
   }
   handleAddOption(e) {
     e.preventDefault();
@@ -122,11 +132,7 @@ class AddOption extends React.Component {
     // if error is none, everything is ok
     const error = this.props.handleAddOption(option);
 
-    this.setState(() => {
-      return { error };
-      // shorthand syntax of retrn { error: error };
-    });
-
+    this.setState(() => ({ error }));
     e.target.elements.option.value = '';
   }
   render() {
@@ -143,4 +149,4 @@ class AddOption extends React.Component {
 }
 
 // using default props is powerful, it allows us to create really useful and reusable components.
-ReactDOM.render(<OddApp options={['option 1', 'option 2', 'option 3']}/>, document.getElementById('app'));
+ReactDOM.render(<OddApp />, document.getElementById('app'));

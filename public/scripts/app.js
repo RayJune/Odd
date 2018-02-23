@@ -18,6 +18,7 @@ var OddApp = function (_React$Component) {
 
     _this.handleClearOptions = _this.handleClearOptions.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
+    _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
       options: props.options
@@ -29,8 +30,17 @@ var OddApp = function (_React$Component) {
     key: 'handleClearOptions',
     value: function handleClearOptions() {
       this.setState(function () {
+        return { options: [] };
+      });
+    }
+  }, {
+    key: 'handleDeleteOption',
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prevState) {
         return {
-          options: []
+          options: prevState.options.filter(function (option) {
+            return optionToRemove !== option;
+          })
         };
       });
     }
@@ -52,8 +62,7 @@ var OddApp = function (_React$Component) {
 
       this.setState(function (prevState) {
         return {
-          options: prevState.options.concat(option)
-        };
+          options: prevState.options.concat(option) };
       });
     }
   }, {
@@ -71,7 +80,8 @@ var OddApp = function (_React$Component) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          handleClearOptions: this.handleClearOptions
+          handleClearOptions: this.handleClearOptions,
+          handleDeleteOption: this.handleDeleteOption
         }),
         React.createElement(AddOption, {
           handleAddOption: this.handleAddOption
@@ -136,7 +146,11 @@ var Options = function Options(props) {
       'Clear'
     ),
     props.options.map(function (option) {
-      return React.createElement(Option, { key: option, optionText: option });
+      return React.createElement(Option, {
+        key: option,
+        optionText: option,
+        handleDeleteOption: props.handleDeleteOption
+      });
     })
   );
 };
@@ -145,7 +159,16 @@ var Option = function Option(props) {
   return React.createElement(
     'div',
     null,
-    props.optionText
+    props.optionText,
+    React.createElement(
+      'button',
+      {
+        onClick: function onClick() {
+          props.handleDeleteOption(props.optionText);
+        }
+      },
+      'remove'
+    )
   );
 };
 
@@ -175,9 +198,7 @@ var AddOption = function (_React$Component2) {
 
       this.setState(function () {
         return { error: error };
-        // shorthand syntax of retrn { error: error };
       });
-
       e.target.elements.option.value = '';
     }
   }, {
@@ -211,4 +232,4 @@ var AddOption = function (_React$Component2) {
 // using default props is powerful, it allows us to create really useful and reusable components.
 
 
-ReactDOM.render(React.createElement(OddApp, { options: ['option 1', 'option 2', 'option 3'] }), document.getElementById('app'));
+ReactDOM.render(React.createElement(OddApp, null), document.getElementById('app'));
