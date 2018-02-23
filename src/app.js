@@ -1,6 +1,3 @@
-// stateless function component 
-// suitable for simple presentational components
-
 class OddApp extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +5,7 @@ class OddApp extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: []
+      options: props.options
     };
   }
   handleClearOptions() {
@@ -37,12 +34,11 @@ class OddApp extends React.Component {
     })
   }
   render() {
-    const title = '偶得';
     const subtitle = '文章本天成，妙手偶得之';
 
     return (
       <div>
-        <Header title={title} subtitle={subtitle}/> 
+        <Header subtitle={subtitle}/> 
         <Action 
           hasOptions={this.state.options.length > 0}
           handlePick={this.handlePick}
@@ -59,25 +55,23 @@ class OddApp extends React.Component {
   }
 }
 
+// use default props to implement default state value, which is fantastic~!
+OddApp.defaultProps = {
+  options: []
+};
+
 const Header = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
-      <h2>{props.subtitle}</h2>
+      {props.subtitle && <h2>{props.subtitle}</h2>}
     </div>
   );
 };
 
-// class Header extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>{this.props.title}</h1>
-//         <h2>{this.props.subtitle}</h2>
-//       </div>
-//     );
-//   }
-// }
+Header.defaultProps = {
+  title: '偶得'
+};
 
 const Action = (props) => {
   return (
@@ -92,21 +86,6 @@ const Action = (props) => {
   );
 };
 
-// class Action extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <button 
-//           onClick={this.props.handlePick}
-//           disabled={!this.props.hasOptions}
-//         >
-//           何不试一把手气？
-//         </button>
-//       </div>
-//     )
-//   }
-// }
-
 const Options = (props) => {
   return (
     <div>
@@ -120,19 +99,6 @@ const Options = (props) => {
   );
 };
 
-// class Options extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <button onClick={this.props.handleClearOptions}>Remove All</button>
-//         {
-//           this.props.options.map((option) => <Option key={option} optionText={option} />)
-//         }
-//       </div>
-//     );
-//   }
-// }
-
 const Option = (props) => {
   return (
     <div>
@@ -140,16 +106,6 @@ const Option = (props) => {
     </div>
   );
 };
-
-// class Option extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         {this.props.optionText}
-//       </div>
-//     );
-//   }
-// }
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -186,4 +142,5 @@ class AddOption extends React.Component {
   }
 }
 
-ReactDOM.render(<OddApp />, document.getElementById('app'));
+// using default props is powerful, it allows us to create really useful and reusable components.
+ReactDOM.render(<OddApp options={['option 1', 'option 2', 'option 3']}/>, document.getElementById('app'));

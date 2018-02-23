@@ -8,9 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// stateless function component 
-// suitable for simple presentational components
-
 var OddApp = function (_React$Component) {
   _inherits(OddApp, _React$Component);
 
@@ -23,7 +20,7 @@ var OddApp = function (_React$Component) {
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: []
+      options: props.options
     };
     return _this;
   }
@@ -62,13 +59,12 @@ var OddApp = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var title = '偶得';
       var subtitle = '文章本天成，妙手偶得之';
 
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -87,6 +83,13 @@ var OddApp = function (_React$Component) {
   return OddApp;
 }(React.Component);
 
+// use default props to implement default state value, which is fantastic~!
+
+
+OddApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(props) {
   return React.createElement(
     'div',
@@ -96,7 +99,7 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       'h2',
       null,
       props.subtitle
@@ -104,16 +107,9 @@ var Header = function Header(props) {
   );
 };
 
-// class Header extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>{this.props.title}</h1>
-//         <h2>{this.props.subtitle}</h2>
-//       </div>
-//     );
-//   }
-// }
+Header.defaultProps = {
+  title: '偶得'
+};
 
 var Action = function Action(props) {
   return React.createElement(
@@ -130,21 +126,6 @@ var Action = function Action(props) {
   );
 };
 
-// class Action extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <button 
-//           onClick={this.props.handlePick}
-//           disabled={!this.props.hasOptions}
-//         >
-//           何不试一把手气？
-//         </button>
-//       </div>
-//     )
-//   }
-// }
-
 var Options = function Options(props) {
   return React.createElement(
     'div',
@@ -160,19 +141,6 @@ var Options = function Options(props) {
   );
 };
 
-// class Options extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <button onClick={this.props.handleClearOptions}>Remove All</button>
-//         {
-//           this.props.options.map((option) => <Option key={option} optionText={option} />)
-//         }
-//       </div>
-//     );
-//   }
-// }
-
 var Option = function Option(props) {
   return React.createElement(
     'div',
@@ -180,16 +148,6 @@ var Option = function Option(props) {
     props.optionText
   );
 };
-
-// class Option extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         {this.props.optionText}
-//       </div>
-//     );
-//   }
-// }
 
 var AddOption = function (_React$Component2) {
   _inherits(AddOption, _React$Component2);
@@ -250,4 +208,7 @@ var AddOption = function (_React$Component2) {
   return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(OddApp, null), document.getElementById('app'));
+// using default props is powerful, it allows us to create really useful and reusable components.
+
+
+ReactDOM.render(React.createElement(OddApp, { options: ['option 1', 'option 2', 'option 3'] }), document.getElementById('app'));
