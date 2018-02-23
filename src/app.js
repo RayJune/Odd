@@ -9,6 +9,29 @@ class OddApp extends React.Component {
       options: props.options
     };
   }
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+      
+      if (options) {
+        this.setState(() => ({ options }));
+      }
+    } catch (error) {
+      // JSON data is invalid
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+      console.log('saving data~');
+    }
+  }
+  componentWillUnmount() {
+    // barely use, but it's important to know it exists
+    console.log('componentWillUnmount');
+  }
   handleClearOptions() {
     this.setState(() => ({ options: [] }));
   }
@@ -91,6 +114,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleClearOptions}>Clear</button>
+      {props.options.length === 0 && <p>以前我没得选，现在我想做一个好人 ：》</p>}
       {props.options.map((option) => (
         <Option 
           key={option} 
@@ -129,11 +153,14 @@ class AddOption extends React.Component {
     e.preventDefault();
     
     const option = e.target.elements.option.value.trim();
-    // if error is none, everything is ok
     const error = this.props.handleAddOption(option);
+    // if error is none, everything is ok
 
     this.setState(() => ({ error }));
-    e.target.elements.option.value = '';
+
+    if (!error) {
+      e.target.elements.option.value = '';
+    }
   }
   render() {
     return (

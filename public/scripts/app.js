@@ -27,6 +27,37 @@ var OddApp = function (_React$Component) {
   }
 
   _createClass(OddApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) {
+          this.setState(function () {
+            return { options: options };
+          });
+        }
+      } catch (error) {
+        // JSON data is invalid
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+        console.log('saving data~');
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      // barely use, but it's important to know it exists
+      console.log('componentWillUnmount');
+    }
+  }, {
     key: 'handleClearOptions',
     value: function handleClearOptions() {
       this.setState(function () {
@@ -145,6 +176,11 @@ var Options = function Options(props) {
       { onClick: props.handleClearOptions },
       'Clear'
     ),
+    props.options.length === 0 && React.createElement(
+      'p',
+      null,
+      '\u4EE5\u524D\u6211\u6CA1\u5F97\u9009\uFF0C\u73B0\u5728\u6211\u60F3\u505A\u4E00\u4E2A\u597D\u4EBA \uFF1A\u300B'
+    ),
     props.options.map(function (option) {
       return React.createElement(Option, {
         key: option,
@@ -193,13 +229,16 @@ var AddOption = function (_React$Component2) {
       e.preventDefault();
 
       var option = e.target.elements.option.value.trim();
-      // if error is none, everything is ok
       var error = this.props.handleAddOption(option);
+      // if error is none, everything is ok
 
       this.setState(function () {
         return { error: error };
       });
-      e.target.elements.option.value = '';
+
+      if (!error) {
+        e.target.elements.option.value = '';
+      }
     }
   }, {
     key: 'render',
