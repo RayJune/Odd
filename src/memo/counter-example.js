@@ -1,35 +1,36 @@
-class Counter extends React.Component {
+class MagicalCounter extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddOne = this.handleAddOne.bind(this);
     this.handleMinusOne = this.handleMinusOne.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.state = {
-      count: props.count
+      count: 0
     };
   }
+  // componentDidMount
+  componentDidMount() {
+    const count = parseInt(localStorage.getItem('count'), 10);
+    // or use Number() const count = Number(localStorage.getItem('count'));
+
+
+    if (count || count === 0) {
+      this.setState(() => ({ count }))
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.count !== this.state.count) {
+      localStorage.setItem('count', this.state.count);
+    }
+  }
   handleAddOne() {
-    // this.state.count += 1; can't re-render automatically
-    this.setState((prevState) => {
-      return {
-        count: prevState.count + 1
-      };
-    });
-    console.log(this.state.count);
+    this.setState((prevState) => ({ count: prevState.count + 1 }));
   }
   handleMinusOne() {
-    this.setState((prevState) => {
-      return {
-        count: prevState.count - 1
-      };
-    });
+    this.setState((prevState) => ({ count: prevState.count - 1 }));
   }
   handleReset() {
-    this.setState(() => {
-      return {
-        count: 0
-      };
-    });
+    this.setState(() => ({ count: 0 }));
   }
   render() {
     return (
@@ -43,9 +44,5 @@ class Counter extends React.Component {
   }
 }
 
-Counter.defaultProps = {
-  count: 0
-};
-
-// ReactDOM.render(<Counter count={2}/>, document.getElementById('app'));
-ReactDOM.render(<Counter />, document.getElementById('app'));
+// ReactDOM.render(<MagicalCounter count={2}/>, document.getElementById('app'));
+ReactDOM.render(<MagicalCounter />, document.getElementById('app'));

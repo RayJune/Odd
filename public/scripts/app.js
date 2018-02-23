@@ -8,237 +8,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OddApp = function (_React$Component) {
-  _inherits(OddApp, _React$Component);
+var MagicalCounter = function (_React$Component) {
+  _inherits(MagicalCounter, _React$Component);
 
-  function OddApp(props) {
-    _classCallCheck(this, OddApp);
+  function MagicalCounter(props) {
+    _classCallCheck(this, MagicalCounter);
 
-    var _this = _possibleConstructorReturn(this, (OddApp.__proto__ || Object.getPrototypeOf(OddApp)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MagicalCounter.__proto__ || Object.getPrototypeOf(MagicalCounter)).call(this, props));
 
-    _this.handleClearOptions = _this.handleClearOptions.bind(_this);
-    _this.handlePick = _this.handlePick.bind(_this);
-    _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
-    _this.handleAddOption = _this.handleAddOption.bind(_this);
+    _this.handleAddOne = _this.handleAddOne.bind(_this);
+    _this.handleMinusOne = _this.handleMinusOne.bind(_this);
+    _this.handleReset = _this.handleReset.bind(_this);
     _this.state = {
-      options: props.options
+      count: 0
     };
     return _this;
   }
+  // componentDidMount
 
-  _createClass(OddApp, [{
+
+  _createClass(MagicalCounter, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      try {
-        var json = localStorage.getItem('options');
-        var options = JSON.parse(json);
+      var count = parseInt(localStorage.getItem('count'), 10);
+      // or use Number() const count = Number(localStorage.getItem('count'));
 
-        if (options) {
-          this.setState(function () {
-            return { options: options };
-          });
-        }
-      } catch (error) {
-        // JSON data is invalid
+
+      if (count || count === 0) {
+        this.setState(function () {
+          return { count: count };
+        });
       }
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      if (prevProps.options.length !== this.state.options.length) {
-        var json = JSON.stringify(this.state.options);
-        localStorage.setItem('options', json);
-        console.log('saving data~');
+      if (prevState.count !== this.state.count) {
+        localStorage.setItem('count', this.state.count);
       }
     }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      // barely use, but it's important to know it exists
-      console.log('componentWillUnmount');
-    }
-  }, {
-    key: 'handleClearOptions',
-    value: function handleClearOptions() {
-      this.setState(function () {
-        return { options: [] };
-      });
-    }
-  }, {
-    key: 'handleDeleteOption',
-    value: function handleDeleteOption(optionToRemove) {
+    key: 'handleAddOne',
+    value: function handleAddOne() {
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.filter(function (option) {
-            return optionToRemove !== option;
-          })
-        };
+        return { count: prevState.count + 1 };
       });
     }
   }, {
-    key: 'handlePick',
-    value: function handlePick() {
-      var randomNum = Math.floor(Math.random() * this.state.options.length);
-      var option = this.state.options[randomNum];
-      console.log(option);
-    }
-  }, {
-    key: 'handleAddOption',
-    value: function handleAddOption(option) {
-      if (!option) {
-        return 'Enter valid value to add item';
-      } else if (this.state.options.indexOf(option) > -1) {
-        return 'This option already exists';
-      }
-
+    key: 'handleMinusOne',
+    value: function handleMinusOne() {
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.concat(option) };
+        return { count: prevState.count - 1 };
       });
     }
   }, {
-    key: 'render',
-    value: function render() {
-      var subtitle = '文章本天成，妙手偶得之';
-
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(Header, { subtitle: subtitle }),
-        React.createElement(Action, {
-          hasOptions: this.state.options.length > 0,
-          handlePick: this.handlePick
-        }),
-        React.createElement(Options, {
-          options: this.state.options,
-          handleClearOptions: this.handleClearOptions,
-          handleDeleteOption: this.handleDeleteOption
-        }),
-        React.createElement(AddOption, {
-          handleAddOption: this.handleAddOption
-        })
-      );
-    }
-  }]);
-
-  return OddApp;
-}(React.Component);
-
-// use default props to implement default state value, which is fantastic~!
-
-
-OddApp.defaultProps = {
-  options: []
-};
-
-var Header = function Header(props) {
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      props.title
-    ),
-    props.subtitle && React.createElement(
-      'h2',
-      null,
-      props.subtitle
-    )
-  );
-};
-
-Header.defaultProps = {
-  title: '偶得'
-};
-
-var Action = function Action(props) {
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'button',
-      {
-        onClick: props.handlePick,
-        disabled: !props.hasOptions
-      },
-      '\u4F55\u4E0D\u8BD5\u4E00\u628A\u624B\u6C14\uFF1F'
-    )
-  );
-};
-
-var Options = function Options(props) {
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'button',
-      { onClick: props.handleClearOptions },
-      'Clear'
-    ),
-    props.options.length === 0 && React.createElement(
-      'p',
-      null,
-      '\u4EE5\u524D\u6211\u6CA1\u5F97\u9009\uFF0C\u73B0\u5728\u6211\u60F3\u505A\u4E00\u4E2A\u597D\u4EBA \uFF1A\u300B'
-    ),
-    props.options.map(function (option) {
-      return React.createElement(Option, {
-        key: option,
-        optionText: option,
-        handleDeleteOption: props.handleDeleteOption
-      });
-    })
-  );
-};
-
-var Option = function Option(props) {
-  return React.createElement(
-    'div',
-    null,
-    props.optionText,
-    React.createElement(
-      'button',
-      {
-        onClick: function onClick() {
-          props.handleDeleteOption(props.optionText);
-        }
-      },
-      'remove'
-    )
-  );
-};
-
-var AddOption = function (_React$Component2) {
-  _inherits(AddOption, _React$Component2);
-
-  function AddOption(props) {
-    _classCallCheck(this, AddOption);
-
-    var _this2 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
-
-    _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
-    _this2.state = {
-      error: undefined
-    };
-    return _this2;
-  }
-
-  _createClass(AddOption, [{
-    key: 'handleAddOption',
-    value: function handleAddOption(e) {
-      e.preventDefault();
-
-      var option = e.target.elements.option.value.trim();
-      var error = this.props.handleAddOption(option);
-      // if error is none, everything is ok
-
+    key: 'handleReset',
+    value: function handleReset() {
       this.setState(function () {
-        return { error: error };
+        return { count: 0 };
       });
-
-      if (!error) {
-        e.target.elements.option.value = '';
-      }
     }
   }, {
     key: 'render',
@@ -246,29 +74,35 @@ var AddOption = function (_React$Component2) {
       return React.createElement(
         'div',
         null,
-        this.state.error && React.createElement(
-          'p',
+        React.createElement(
+          'h1',
           null,
-          this.state.error
+          '\u4E00\u53EA\u9B54\u6027\u7684\u8BA1\u6570\u5668\uFF1A',
+          this.state.count
         ),
         React.createElement(
-          'form',
-          { onSubmit: this.handleAddOption },
-          React.createElement('input', { type: 'text', name: 'option', placeholder: '\u5B58\u653E\u4E00\u4E2A\u5C0F\u5FC3\u613F\u628A\uFF1A\uFF09' }),
-          React.createElement(
-            'button',
-            null,
-            '\u6DFB\u52A0'
-          )
+          'button',
+          { onClick: this.handleAddOne },
+          '+1'
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.handleMinusOne },
+          '-1'
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.handleReset },
+          'reset'
         )
       );
     }
   }]);
 
-  return AddOption;
+  return MagicalCounter;
 }(React.Component);
 
-// using default props is powerful, it allows us to create really useful and reusable components.
+// ReactDOM.render(<MagicalCounter count={2}/>, document.getElementById('app'));
 
 
-ReactDOM.render(React.createElement(OddApp, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(MagicalCounter, null), document.getElementById('app'));

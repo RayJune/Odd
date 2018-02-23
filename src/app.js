@@ -6,7 +6,7 @@ class OddApp extends React.Component {
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: props.options
+      options: []
     };
   }
   componentDidMount() {
@@ -78,11 +78,6 @@ class OddApp extends React.Component {
     );
   }
 }
-
-// use default props to implement default state value, which is fantastic~!
-OddApp.defaultProps = {
-  options: []
-};
 
 const Header = (props) => {
   return (
