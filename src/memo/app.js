@@ -22,7 +22,7 @@ class OddApp extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.options.length !== this.state.options.length) {
+    if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
       console.log('saving data~');
