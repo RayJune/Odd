@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import OddApp from './components/OddApp';
+import './styles/style.css'
 
 ReactDOM.render(<OddApp />, document.getElementById('app'));
 
