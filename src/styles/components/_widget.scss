@@ -1,18 +1,18 @@
 .widget {
-  background-color: aliceblue;
-  margin-bottom: 2rem;
+  background-color: $widget-background-color;
+  margin-bottom: $l-size;
 }
 
 .widget-header {
-  background-color: darken(aliceblue, 10%);
+  background-color: darken($widget-background-color, 10%);
   display: flex;
-  padding: 1.5rem;
+  padding: $m-size;
   justify-content: space-between;
-  border-bottom: 1px solid darken(aliceblue, 15%);
+  border-bottom: 1px solid darken($widget-background-color, 15%);
 }
 
 .widget__message {
-  font-size: 2rem;
+  font-size: $basic-fontsize;
   text-align: center;
 }
 

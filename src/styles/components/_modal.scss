@@ -20,19 +20,20 @@
 .modal {
   color: white;
   background-color: #444;
-  width: 62%;
+  min-width: 30rem;
+  max-width: 62%;
   outline: none;
-  padding: 2rem;
+  padding: $l-size;
   text-align: center;
   border-radius: 10px 10px 10px 10px;
 }
 
 .modal__title {
-  margin: 0 0 2rem 0;
+  margin: 0 0 $l-size 0;
 }
 
 .modal__body {
   font-size: 2.3rem;
-  margin: 0 0 2rem 0;
+  margin: 0 0 $l-size 0;
   word-break: break-all;
 }

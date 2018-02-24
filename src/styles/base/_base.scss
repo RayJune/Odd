@@ -4,7 +4,7 @@ html {
 
 body {
   font-size: $basic-fontsize;
-  line-height: 2rem;
+  line-height: $l-size;
   font-family: STFangsong, "Songti TC", Georgia, simsun, Arial, sans-serif;
   color: $body-color;
   background-color: $body-background;

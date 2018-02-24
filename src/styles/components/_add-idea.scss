@@ -1,18 +1,29 @@
 .add-option-error {
   font-style: italic;
-  font-size: 2rem;
+  font-size: $middle-fontsize;
   text-align: center;
 }
 
 .add-option {
   display: flex;
-  padding: 1rem;
+  padding: $s-size;
 }
 
 .add-option__input {
   flex-grow: 1;
   font-size: 1.8rem;
   border-bottom: 1px solid darken(lightslategrey, 10%);
-  margin-right: 1rem;
-  padding: 1rem;
+  margin-right: $s-size;
+  padding: $s-size;
+}
+
+@media (max-width: $desktop-breakpoint) {
+  .add-option {
+    flex-direction: column;
+  }
+
+  .add-option__input {
+    margin-right: 0;
+    margin-bottom: $s-size;
+  }
 }

@@ -19,11 +19,16 @@ $button--link-color: $header-background-color;
 $button--link-background-color: white;
 $button--link-border-color: lightgray;
 
+// widget color --------------------------------------------------
+
+$widget-background-color: aliceblue;
+
 // ----------------------- font-sizes ----------------------------
 
 // basic font-size -----------------------------------------------
 
 $basic-fontsize: 1.7rem;
+$middle-fontsize: 2rem;
 
 // header font-size ----------------------------------------------
 
@@ -33,3 +38,11 @@ $header-subtitle-fontsize: 2.2rem;
 // button font-size ----------------------------------------------
 
 $big-button-fontsize: 2.6rem;
+
+// -------------------------- Spacing ----------------------------
+
+$s-size: 1.2rem;
+$m-size: 1.6rem;
+$l-size: 2rem;
+$xl-size: 4.8rem;
+$desktop-breakpoint: 45rem;

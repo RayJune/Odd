@@ -162,7 +162,7 @@ class Addidea extends React.Component {
       <div>
         {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleAddidea}>
-          <input type="text" name="idea" placeholder="存放一个小心愿把：）"/>
+          <input type="text" name="idea" placeholder="存放一个灵感把：）"/>
           <button>添加</button>
         </form>
       </div>
