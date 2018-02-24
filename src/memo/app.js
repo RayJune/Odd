@@ -1,30 +1,30 @@
 class OddApp extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClearOptions = this.handleClearOptions.bind(this);
+    this.handleClearideas = this.handleClearideas.bind(this);
     this.handlePick = this.handlePick.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteidea = this.handleDeleteidea.bind(this);
+    this.handleAddidea = this.handleAddidea.bind(this);
     this.state = {
-      options: []
+      ideas: []
     };
   }
   componentDidMount() {
     try {
-      const json = localStorage.getItem('options');
-      const options = JSON.parse(json);
+      const json = localStorage.getItem('ideas');
+      const ideas = JSON.parse(json);
       
-      if (options) {
-        this.setState(() => ({ options }));
+      if (ideas) {
+        this.setState(() => ({ ideas }));
       }
     } catch (error) {
       // JSON data is invalid
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.options.length !== this.state.options.length) {
-      const json = JSON.stringify(this.state.options);
-      localStorage.setItem('options', json);
+    if (prevState.ideas.length !== this.state.ideas.length) {
+      const json = JSON.stringify(this.state.ideas);
+      localStorage.setItem('ideas', json);
       console.log('saving data~');
     }
   }
@@ -32,28 +32,28 @@ class OddApp extends React.Component {
     // barely use, but it's important to know it exists
     console.log('componentWillUnmount');
   }
-  handleClearOptions() {
-    this.setState(() => ({ options: [] }));
+  handleClearideas() {
+    this.setState(() => ({ ideas: [] }));
   }
-  handleDeleteOption(optionToRemove) {
+  handleDeleteidea(ideaToRemove) {
     this.setState((prevState) => ({
-      options: prevState.options.filter((option) => optionToRemove !== option)
+      ideas: prevState.ideas.filter((idea) => ideaToRemove !== idea)
     }));
   }
   handlePick() {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
-    console.log(option);
+    const randomNum = Math.floor(Math.random() * this.state.ideas.length);
+    const idea = this.state.ideas[randomNum];
+    console.log(idea);
   }
-  handleAddOption(option) {
-    if (!option) {
+  handleAddidea(idea) {
+    if (!idea) {
       return 'Enter valid value to add item';
-    } else if (this.state.options.indexOf(option) > -1){
-      return 'This option already exists';
+    } else if (this.state.ideas.indexOf(idea) > -1){
+      return 'This idea already exists';
     }
 
     this.setState((prevState) => ({ 
-      options: prevState.options.concat(option) }
+      ideas: prevState.ideas.concat(idea) }
     ));
   }
   render() {
@@ -63,16 +63,16 @@ class OddApp extends React.Component {
       <div>
         <Header subtitle={subtitle}/> 
         <Action 
-          hasOptions={this.state.options.length > 0}
+          hasideas={this.state.ideas.length > 0}
           handlePick={this.handlePick}
         />
-        <Options 
-          options={this.state.options}
-          handleClearOptions={this.handleClearOptions}
-          handleDeleteOption={this.handleDeleteOption}
+        <Ideas 
+          ideas={this.state.ideas}
+          handleClearideas={this.handleClearideas}
+          handleDeleteidea={this.handleDeleteidea}
         />
-        <AddOption 
-          handleAddOption={this.handleAddOption}
+        <Addidea 
+          handleAddidea={this.handleAddidea}
         />
       </div>
     );
@@ -97,7 +97,7 @@ const Action = (props) => {
     <div>
       <button
         onClick={props.handlePick}
-        disabled={!props.hasOptions}
+        disabled={!props.hasideas}
       >
         点亮一个灵感
       </button>
@@ -105,29 +105,29 @@ const Action = (props) => {
   );
 };
 
-const Options = (props) => {
+const ideas = (props) => {
   return (
     <div>
-      <button onClick={props.handleClearOptions}>Clear</button>
-      {props.options.length === 0 && <p>以前我没得选，现在我想做一个好人 ：》</p>}
-      {props.options.map((option) => (
-        <Option 
-          key={option} 
-          optionText={option}
-          handleDeleteOption={props.handleDeleteOption}
+      <button onClick={props.handleClearideas}>Clear</button>
+      {props.ideas.length === 0 && <p>以前我没得选，现在我想做一个好人 ：》</p>}
+      {props.ideas.map((idea) => (
+        <idea 
+          key={idea} 
+          ideaText={idea}
+          handleDeleteidea={props.handleDeleteidea}
         />
       ))}
     </div>
   );
 };
 
-const Option = (props) => {
+const idea = (props) => {
   return (
     <div>
-      {props.optionText}
+      {props.ideaText}
       <button 
         onClick={() => {
-          props.handleDeleteOption(props.optionText)
+          props.handleDeleteidea(props.ideaText)
         }}
       >
         remove
@@ -136,33 +136,33 @@ const Option = (props) => {
   );
 };
 
-class AddOption extends React.Component {
+class Addidea extends React.Component {
   constructor(props) {
     super(props);
-    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleAddidea = this.handleAddidea.bind(this);
     this.state = {
       error: undefined
     };
   }
-  handleAddOption(e) {
+  handleAddidea(e) {
     e.preventDefault();
     
-    const option = e.target.elements.option.value.trim();
-    const error = this.props.handleAddOption(option);
+    const idea = e.target.elements.idea.value.trim();
+    const error = this.props.handleAddidea(idea);
     // if error is none, everything is ok
 
     this.setState(() => ({ error }));
 
     if (!error) {
-      e.target.elements.option.value = '';
+      e.target.elements.idea.value = '';
     }
   }
   render() {
     return (
       <div>
         {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.handleAddOption}>
-          <input type="text" name="option" placeholder="存放一个小心愿把：）"/>
+        <form onSubmit={this.handleAddidea}>
+          <input type="text" name="idea" placeholder="存放一个小心愿把：）"/>
           <button>添加</button>
         </form>
       </div>

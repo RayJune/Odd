@@ -1,59 +1,59 @@
 import React from 'react';
 import Header from './Header';
 import Action from './Action';
-import Options from './Options';
-import AddOption from './AddOption';
-import OptionModal from './OptionModal';
+import Ideas from './Ideas';
+import AddIdea from './AddIdea';
+import IdeaModal from './IdeaModal';
 
 class OddApp extends React.Component {
   state = { 
-    options: [],
-    selectedOption: undefined
+    ideas: [],
+    selectedidea: undefined
   };
   handlePick = () => {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
+    const randomNum = Math.floor(Math.random() * this.state.ideas.length);
+    const idea = this.state.ideas[randomNum];
     
-    this.setState(() => ({ selectedOption: option }));
+    this.setState(() => ({ selectedidea: idea }));
   };
-  handlerClearSelectedOption = () => {
-    this.setState(() => ({ selectedOption: undefined }));
+  handlerClearSelectedidea = () => {
+    this.setState(() => ({ selectedidea: undefined }));
   }
-  handleClearOptions = () => {
-    this.setState(() => ({ options: [] }));
+  handleClearideas = () => {
+    this.setState(() => ({ ideas: [] }));
   };
-  handleDeleteOption = (optionToRemove) => {
+  handleDeleteidea = (ideaToRemove) => {
     this.setState((prevState) => ({
-      options: prevState.options.filter((option) => optionToRemove !== option)
+      ideas: prevState.ideas.filter((idea) => ideaToRemove !== idea)
     }));
   };
-  handleAddOption = (option) => {
-    if (!option) {
+  handleAddIdea = (idea) => {
+    if (!idea) {
       return 'Enter valid value to add item';
-    } else if (this.state.options.indexOf(option) > -1){
-      return 'This option already exists';
+    } else if (this.state.ideas.indexOf(idea) > -1){
+      return 'This idea already exists';
     }
 
     this.setState((prevState) => ({ 
-      options: prevState.options.concat(option) }
+      ideas: prevState.ideas.concat(idea) }
     ));
   };
   componentDidMount() {
     try {
-      const json = localStorage.getItem('options');
-      const options = JSON.parse(json);
+      const json = localStorage.getItem('ideas');
+      const ideas = JSON.parse(json);
       
-      if (options) {
-        this.setState(() => ({ options }));
+      if (ideas) {
+        this.setState(() => ({ ideas }));
       }
     } catch (error) {
       // JSON data is invalid
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.options.length !== this.state.options.length) {
-      const json = JSON.stringify(this.state.options);
-      localStorage.setItem('options', json);
+    if (prevState.ideas.length !== this.state.ideas.length) {
+      const json = JSON.stringify(this.state.ideas);
+      localStorage.setItem('ideas', json);
     }
   }
   componentWillUnmount() {
@@ -66,22 +66,24 @@ class OddApp extends React.Component {
     return (
       <div>
         <Header subtitle={subtitle}/> 
-        <div className="main-container">
+        <div className="main">
           <Action 
-            hasOptions={this.state.options.length > 0}
+            hasIdeas={this.state.ideas.length > 0}
             handlePick={this.handlePick}
           />
-          <Options 
-            options={this.state.options}
-            handleClearOptions={this.handleClearOptions}
-            handleDeleteOption={this.handleDeleteOption}
-          />
-          <AddOption 
-            handleAddOption={this.handleAddOption}
-          />
-          <OptionModal 
-            selectedOption={this.state.selectedOption}
-            handlerClearSelectedOption={this.handlerClearSelectedOption}
+          <div className="widget">
+            <Ideas 
+              ideas={this.state.ideas}
+              handleClearideas={this.handleClearideas}
+              handleDeleteidea={this.handleDeleteidea}
+            />
+            <AddIdea 
+              handleAddIdea={this.handleAddIdea}
+            />
+          </div>
+          <IdeaModal 
+            selectedidea={this.state.selectedidea}
+            handlerClearSelectedidea={this.handlerClearSelectedidea}
           />
         </div>
       </div>

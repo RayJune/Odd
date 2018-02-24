@@ -4,29 +4,29 @@
 const app = {
   title: 'Indecision App',
   subtitle: 'You Never Try, You Never Know',
-  options: []
+  Ideas: []
 };
 const appRoot = document.getElementById('app');;
 
 const onMakeDecision = () => {
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  console.log(option);
+  const randomNum = Math.floor(Math.random() * app.Ideas.length);
+  const Idea = app.Ideas[randomNum];
+  console.log(Idea);
 };
 
 const onClear = () => {
-  app.options = [];
+  app.Ideas = [];
   render();
 };
 
 const onFormSubmit = (e) => {
   e.preventDefault(); // prevent form's default action: refresh the whole page
 
-  const option = e.target.elements.option.value;
+  const Idea = e.target.elements.Idea.value;
 
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = ''; // reset input
+  if (Idea) {
+    app.Ideas.push(Idea);
+    e.target.elements.Idea.value = ''; // reset input
   }
   render();
 };
@@ -36,19 +36,19 @@ const render = () => {
     <div>
       <h1>{app.title}</h1>
       {app.subtitle && <p>{app.subtitle}</p>}
-      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+      <p>{app.Ideas.length > 0 ? 'Here are your Ideas' : 'No Ideas'}</p>
+      <button disabled={app.Ideas.length === 0} onClick={onMakeDecision}>What should I do?</button>
       <button onClick={onClear}>Clear</button>
       <ol>
         {
-          app.options.map((option) => {
-            return <li key={option}>{option}</li>;
+          app.Ideas.map((Idea) => {
+            return <li key={Idea}>{Idea}</li>;
           })
         }
       </ol>
       <form onSubmit={onFormSubmit}>
-        <input type="text" name="option"/>
-        <button>Add Option</button>
+        <input type="text" name="Idea"/>
+        <button>Add Idea</button>
       </form>
     </div>
   );

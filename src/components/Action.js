@@ -5,7 +5,7 @@ const Action = (props) => (
       <button
         className="button big-button"
         onClick={props.handlePick}
-        disabled={!props.hasOptions}
+        disabled={!props.hasIdeas}
       >
         点亮一个灵感
       </button>

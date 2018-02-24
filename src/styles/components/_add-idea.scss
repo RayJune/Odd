@@ -1,0 +1,18 @@
+.add-option-error {
+  font-style: italic;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.add-option {
+  display: flex;
+  padding: 1rem;
+}
+
+.add-option__input {
+  flex-grow: 1;
+  font-size: 1.8rem;
+  border-bottom: 1px solid darken(lightslategrey, 10%);
+  margin-right: 1rem;
+  padding: 1rem;
+}
