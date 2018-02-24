@@ -99,7 +99,7 @@ const Action = (props) => {
         onClick={props.handlePick}
         disabled={!props.hasOptions}
       >
-        何不试一把手气？
+        点亮一个灵感
       </button>
     </div>
   );
