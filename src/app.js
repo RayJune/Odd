@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import OddApp from './components/OddApp';
 
+ReactDOM.render(<OddApp />, document.getElementById('app'));
+
 const Layout1 = (props) => {
   return (
     <div>
@@ -33,8 +35,8 @@ const Layout2 = (props) => {
 
 // ReactDOM.render(<Layout2><p>inline</p></Layout2>, document.getElementById('app'));
 
-ReactDOM.render((
-  <Layout2>
-    <p>inline</p>
-  </Layout2>
-), document.getElementById('app'));
+// ReactDOM.render((
+//   <Layout2>
+//     <p>inline</p>
+//   </Layout2>
+// ), document.getElementById('app'));

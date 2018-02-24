@@ -3,14 +3,22 @@ import Header from './Header';
 import Action from './Action';
 import Options from './Options';
 import AddOption from './AddOption';
+import OptionModal from './OptionModal';
 
 class OddApp extends React.Component {
-  state = { options: [] };
+  state = { 
+    options: [],
+    selectedOption: undefined
+  };
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
-    console.log(option);
+    
+    this.setState(() => ({ selectedOption: option }));
   };
+  handlerClearSelectedOption = () => {
+    this.setState(() => ({ selectedOption: undefined }));
+  }
   handleClearOptions = () => {
     this.setState(() => ({ options: [] }));
   };
@@ -69,6 +77,10 @@ class OddApp extends React.Component {
         />
         <AddOption 
           handleAddOption={this.handleAddOption}
+        />
+        <OptionModal 
+          selectedOption={this.state.selectedOption}
+          handlerClearSelectedOption={this.handlerClearSelectedOption}
         />
       </div>
     );
