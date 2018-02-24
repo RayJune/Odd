@@ -3,9 +3,17 @@ html {
 }
 
 body {
-  font-family: STFangsong, "Songti TC", Georgia, simsun, Arial, sans-serif;
-  font-size: 1.6rem;
+  font-size: $basic-fontsize;
   line-height: 2rem;
-  color: #2C3E50;
-  background-color: #F9F9F5;
+  font-family: STFangsong, "Songti TC", Georgia, simsun, Arial, sans-serif;
+  color: $body-color;
+  background-color: $body-background;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
 }

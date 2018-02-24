@@ -1,0 +1,35 @@
+// ------------------------- Colors ------------------------------
+
+// body color ----------------------------------------------------
+
+$body-background: #F9F9F5; 
+$body-color: #2C3E50;
+
+// Header color --------------------------------------------------
+
+$header-color: white;
+$header-background-color: #444;
+
+// button color --------------------------------------------------
+
+$button-background-color: lightslategrey;
+$button-color: white;
+
+$button--link-color: $header-background-color;
+$button--link-background-color: white;
+$button--link-border-color: lightgray;
+
+// ----------------------- font-sizes ----------------------------
+
+// basic font-size -----------------------------------------------
+
+$basic-fontsize: 1.6rem;
+
+// header font-size ----------------------------------------------
+
+$header-title-fontsize: 3.2rem;
+$header-subtitle-fontsize: 2.2rem;
+
+// button font-size ----------------------------------------------
+
+$big-button-fontsize: $header-title-fontsize;

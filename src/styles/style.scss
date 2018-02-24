@@ -1,2 +1,6 @@
-@import './base/base';
-@import './components/header';
+@import './base/_setting.scss';
+// @import './base/setting is okay to
+@import './base/_base.scss';
+@import './components/_header.scss';
+@import './components/_countainer.scss';
+@import './components/_button.scss'

@@ -21,7 +21,7 @@ class AddOption extends React.Component {
         {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleAddOption}>
           <input type="text" name="option" placeholder="存放一个小心愿把：）"/>
-          <button>添加</button>
+          <button className="button">添加</button>
         </form>
       </div>
     );

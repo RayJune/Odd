@@ -66,22 +66,24 @@ class OddApp extends React.Component {
     return (
       <div>
         <Header subtitle={subtitle}/> 
-        <Action 
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
-        />
-        <Options 
-          options={this.state.options}
-          handleClearOptions={this.handleClearOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption 
-          handleAddOption={this.handleAddOption}
-        />
-        <OptionModal 
-          selectedOption={this.state.selectedOption}
-          handlerClearSelectedOption={this.handlerClearSelectedOption}
-        />
+        <div className="main-container">
+          <Action 
+            hasOptions={this.state.options.length > 0}
+            handlePick={this.handlePick}
+          />
+          <Options 
+            options={this.state.options}
+            handleClearOptions={this.handleClearOptions}
+            handleDeleteOption={this.handleDeleteOption}
+          />
+          <AddOption 
+            handleAddOption={this.handleAddOption}
+          />
+          <OptionModal 
+            selectedOption={this.state.selectedOption}
+            handlerClearSelectedOption={this.handlerClearSelectedOption}
+          />
+        </div>
       </div>
     );
   }

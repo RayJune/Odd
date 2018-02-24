@@ -3,7 +3,12 @@ import Option from './Option';
 
 const Options = (props) => (
   <div>
-    <button onClick={props.handleClearOptions}>Clear</button>
+    <button 
+      className="button button--link"
+      onClick={props.handleClearOptions}
+    >
+      清除所有
+    </button>
     {props.options.length === 0 && <p>以前我没得选，现在我想做一个好人 ：》</p>}
     {props.options.map((option) => (
       <Option 
