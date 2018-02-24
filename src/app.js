@@ -4,6 +4,8 @@ import OddApp from './components/OddApp';
 
 ReactDOM.render(<OddApp />, document.getElementById('app'));
 
+/* cutting */
+
 const Layout1 = (props) => {
   return (
     <div>

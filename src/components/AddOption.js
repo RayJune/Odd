@@ -1,6 +1,6 @@
 import React from 'react';
 
- class AddOption extends React.Component {
+class AddOption extends React.Component {
   state = { error: undefined };
   handleAddOption = (e) => {
     e.preventDefault();
