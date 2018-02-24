@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import OddApp from './components/OddApp';
-import './styles/style.css'
+import './styles/style.scss';
 
 ReactDOM.render(<OddApp />, document.getElementById('app'));
 
