@@ -1,0 +1,10 @@
+.main {
+  width: 62%;
+  margin: 0 auto;
+}
+
+@media (max-width: $desktop-breakpoint) {
+  .main {
+    width: 80%;
+  }
+}

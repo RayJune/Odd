@@ -8,7 +8,7 @@ $body-color: #2C3E50;
 // Header color --------------------------------------------------
 
 $header-color: white;
-$header-background-color: #444;
+$header-background-color: var(--main-color);
 
 // button color --------------------------------------------------
 
@@ -22,6 +22,11 @@ $button--link-border-color: lightgray;
 // widget color --------------------------------------------------
 
 $widget-background-color: aliceblue;
+
+// a color -------------------------------------------------------
+
+$a-main-color: $header-background-color;
+$a-light-color: $button-background-color;
 
 // ----------------------- font-sizes ----------------------------
 

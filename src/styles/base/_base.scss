@@ -1,8 +1,23 @@
+:root {
+	--main-color: #444;
+	--light-color: lightslategrey;
+}
+
 html {
   font-size: 62.5%;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
+  height: 100%;
   font-size: $basic-fontsize;
   line-height: $l-size;
   font-family: STFangsong, "Songti TC", Georgia, simsun, Arial, sans-serif;
@@ -16,4 +31,19 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+a {
+	text-decoration: none;
+	color: var(--main-color);
+	-webkit-transition: color 0.36s;
+	transition: color 0.36s;
+}
+
+a:hover {
+  color: var(--light-color);
+}
+
+p {
+	margin: 0;
 }

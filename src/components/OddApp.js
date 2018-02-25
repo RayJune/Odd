@@ -4,6 +4,7 @@ import Action from './Action';
 import Ideas from './Ideas';
 import AddIdea from './AddIdea';
 import IdeaModal from './IdeaModal';
+import Footer from './Footer';
 
 class OddApp extends React.Component {
   state = { 
@@ -64,7 +65,7 @@ class OddApp extends React.Component {
     const subtitle = '文章本天成，妙手偶得之';
 
     return (
-      <div>
+      <div className="wrapper">
         <Header subtitle={subtitle}/> 
         <div className="main">
           <Action 
@@ -86,6 +87,7 @@ class OddApp extends React.Component {
             handlerClearSelectedidea={this.handlerClearSelectedidea}
           />
         </div>
+        <Footer />
       </div>
     );
   }

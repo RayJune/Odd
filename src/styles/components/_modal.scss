@@ -19,13 +19,18 @@
 
 .modal {
   color: white;
-  background-color: #444;
-  min-width: 30rem;
-  max-width: 62%;
+  background-color: var(--main-color);
+  width: 62%;
   outline: none;
   padding: $l-size;
   text-align: center;
   border-radius: 10px 10px 10px 10px;
+}
+
+@media (max-width: $desktop-breakpoint) {
+  .modal {
+    width: 86%;
+  }
 }
 
 .modal__title {
