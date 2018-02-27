@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './Header';
 import Action from './Action';
 import Ideas from './Ideas';
@@ -6,7 +6,7 @@ import AddIdea from './AddIdea';
 import IdeaModal from './IdeaModal';
 import Footer from './Footer';
 
-class OddApp extends React.Component {
+class OddApp extends Component {
   state = { 
     ideas: [],
     selectedidea: undefined

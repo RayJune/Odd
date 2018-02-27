@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class AddIdea extends React.Component {
+class AddIdea extends Component {
   state = { error: undefined };
   handleAddIdea = (e) => {
     e.preventDefault();
