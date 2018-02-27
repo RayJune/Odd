@@ -5,12 +5,15 @@
 >We don’t read and write poetry because it’s cute. We read and write poetry because we are members of the human race. And the human race is filled with passion. And medicine, law, business, engineering, these are noble pursuits and necessary to sustain life. But poetry, beauty,romance, love, these are what we stay alive for.
 
 借助 React 和 LocalStorage 的魔力，让你的浏览器拥有一块专属于存储美妙诗句的空间吧~
-With React & LocalStorage, let your browser have a space for storing elegant poems.
 
 记录那些振奋人心的诗句；记录那些伤人无形的诗句；记录那些歌颂爱情的诗句；记录那些赏月思乡的诗句；记录那些遍插茱萸的诗句。
-Record poems which contain inspire & blue & love & homesick & friendship.
 
 记录那些你热爱的诗句。
+
+With React & LocalStorage, let your browser have a space for storing elegant poems.
+
+Record poems which contain inspire & blue & love & homesick & friendship.
+
 Record those poems which you love.
 
 ***
