@@ -1,60 +1,60 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Action from './Action';
-import Ideas from './Ideas';
-import AddIdea from './AddIdea';
-import IdeaModal from './IdeaModal';
+import Poems from './Poems';
+import AddPoem from './AddPoem';
+import PoemModal from './PoemModal';
 import Footer from './Footer';
 
 class OddApp extends Component {
   state = { 
-    ideas: [],
-    selectedidea: undefined
+    poems: [],
+    selectePoem: undefined
   };
   handlePick = () => {
-    const randomNum = Math.floor(Math.random() * this.state.ideas.length);
-    const idea = this.state.ideas[randomNum];
+    const randomNum = Math.floor(Math.random() * this.state.poems.length);
+    const poem = this.state.poems[randomNum];
     
-    this.setState(() => ({ selectedidea: idea }));
+    this.setState(() => ({ selectePoem: poem }));
   };
-  handlerClearSelectedidea = () => {
-    this.setState(() => ({ selectedidea: undefined }));
+  handlerClearSelectePoem = () => {
+    this.setState(() => ({ selectePoem: undefined }));
   }
-  handleClearideas = () => {
-    this.setState(() => ({ ideas: [] }));
+  handleClearPoems = () => {
+    this.setState(() => ({ poems: [] }));
   };
-  handleDeleteidea = (ideaToRemove) => {
+  handleDeletePoem = (poemToRemove) => {
     this.setState((prevState) => ({
-      ideas: prevState.ideas.filter((idea) => ideaToRemove !== idea)
+      poems: prevState.poems.filter((poem) => poemToRemove !== poem)
     }));
   };
-  handleAddIdea = (idea) => {
-    if (!idea) {
+  handleAddPoem = (poem) => {
+    if (!poem) {
       return 'Enter valid value to add item';
-    } else if (this.state.ideas.indexOf(idea) > -1){
-      return 'This idea already exists';
+    } else if (this.state.poems.indexOf(poem) > -1){
+      return 'This poem already exists';
     }
 
     this.setState((prevState) => ({ 
-      ideas: prevState.ideas.concat(idea) }
+      poems: prevState.poems.concat(poem) }
     ));
   };
   componentDidMount() {
     try {
-      const json = localStorage.getItem('ideas');
-      const ideas = JSON.parse(json);
+      const json = localStorage.getItem('poems');
+      const poems = JSON.parse(json);
       
-      if (ideas) {
-        this.setState(() => ({ ideas }));
+      if (poems) {
+        this.setState(() => ({ poems }));
       }
     } catch (error) {
       // JSON data is invalid
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.ideas.length !== this.state.ideas.length) {
-      const json = JSON.stringify(this.state.ideas);
-      localStorage.setItem('ideas', json);
+    if (prevState.poems.length !== this.state.poems.length) {
+      const json = JSON.stringify(this.state.poems);
+      localStorage.setItem('poems', json);
     }
   }
   componentWillUnmount() {
@@ -69,22 +69,22 @@ class OddApp extends Component {
         <Header subtitle={subtitle}/> 
         <div className="main">
           <Action 
-            hasIdeas={this.state.ideas.length > 0}
+            hasPoems={this.state.poems.length > 0}
             handlePick={this.handlePick}
           />
           <div className="widget">
-            <Ideas 
-              ideas={this.state.ideas}
-              handleClearideas={this.handleClearideas}
-              handleDeleteidea={this.handleDeleteidea}
+            <Poems 
+              poems={this.state.poems}
+              handleClearPoems={this.handleClearPoems}
+              handleDeletePoem={this.handleDeletePoem}
             />
-            <AddIdea 
-              handleAddIdea={this.handleAddIdea}
+            <AddPoem
+              handleAddPoem={this.handleAddPoem}
             />
           </div>
-          <IdeaModal 
-            selectedidea={this.state.selectedidea}
-            handlerClearSelectedidea={this.handlerClearSelectedidea}
+          <PoemModal 
+            selectePoem={this.state.selectePoem}
+            handlerClearSelectePoem={this.handlerClearSelectePoem}
           />
         </div>
         <Footer />

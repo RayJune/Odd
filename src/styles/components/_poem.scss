@@ -1,11 +1,11 @@
-.idea {
+.poem {
   display: flex;
   justify-content: space-between;
   padding: $m-size;
   border-bottom: 1px solid lighten(aliceblue, 10%);
 }
 
-.idea__text {
+.poem__text {
   margin: 0;
   font-size: $basic-fontsize;
   line-height: 3rem;

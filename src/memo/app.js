@@ -63,7 +63,7 @@ class OddApp extends React.Component {
       <div>
         <Header subtitle={subtitle}/> 
         <Action 
-          hasideas={this.state.ideas.length > 0}
+          hasPoems={this.state.ideas.length > 0}
           handlePick={this.handlePick}
         />
         <Ideas 
@@ -97,7 +97,7 @@ const Action = (props) => {
     <div>
       <button
         onClick={props.handlePick}
-        disabled={!props.hasideas}
+        disabled={!props.hasPoems}
       >
         点亮一个灵感
       </button>
