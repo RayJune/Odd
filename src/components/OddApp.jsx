@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Header from './Header.jsx';
-import Action from './Action.jsx';
-import Poems from './Poems.jsx';
-import AddPoem from './AddPoem.jsx';
-import PoemModal from './PoemModal.jsx';
-import Footer from './Footer.jsx';
+import Header from './Header';
+import Action from './Action';
+import Poems from './Poems';
+import AddPoem from './AddPoem';
+import PoemModal from './PoemModal';
+import Footer from './Footer';
 
 class OddApp extends Component {
   state = {

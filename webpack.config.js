@@ -24,6 +24,7 @@ module.exports = {
       },
     ],
   },
+  resolve: { extensions: ['.js', '.jsx'] },
   plugins: [
     new UglifyJsPlugin({
       sourceMap: true,

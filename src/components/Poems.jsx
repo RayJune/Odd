@@ -1,5 +1,5 @@
 import React from 'react';
-import Poem from './Poem.jsx';
+import Poem from './Poem';
 
 const Poems = props => (
   <div>
