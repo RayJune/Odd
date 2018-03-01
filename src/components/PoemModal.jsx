@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const PoemModal = (props) => (
+const PoemModal = props => (
   <Modal
     isOpen={!!props.selectedPoem}
     onRequestClose={props.handlerClearSelectedPoem}

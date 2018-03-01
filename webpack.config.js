@@ -2,29 +2,29 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/app.jsx',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [{
       loader: 'babel-loader',
-      test: /\.js$/,
-      exclude: /node_modules/
-    },{
+      test: /\.jsx$/,
+      exclude: /node_modules/,
+    }, {
       test: /\.s?css$/,
       use: [
         'style-loader',
         'css-loader',
-        'sass-loader'
-      ]
-    }]
+        'sass-loader',
+      ],
+    }],
   },
-  devtool: "cheap-module-eval-source-map",
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'public')
-  }
+    contentBase: path.join(__dirname, 'public'),
+  },
 };
 
 // A loader lets you customize the behavior of webpac when it loads a given file

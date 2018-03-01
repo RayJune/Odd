@@ -1,11 +1,11 @@
 import React from 'react';
-import Poem from './Poem';
+import Poem from './Poem.jsx';
 
-const Poems = (props) => (
+const Poems = props => (
   <div>
     <div className="widget-header">
       <h3 className="widget-header__title">灵感池</h3>
-      <button 
+      <button
         className="button button--link"
         onClick={props.handleClearPoems}
       >
@@ -14,8 +14,8 @@ const Poems = (props) => (
     </div>
     {props.poems.length === 0 && <p className="widget__message">你的诗是什么？</p>}
     {props.poems.map((poem, index) => (
-      <poem 
-        key={poem} 
+      <Poem
+        key={poem}
         poemText={poem}
         count={index + 1}
         handleDeletePoem={props.handleDeletePoem}
