@@ -12,16 +12,18 @@ $header-background-color: var(--main-color);
 
 // button color --------------------------------------------------
 
-$button-background-color: lightslategrey;
+$button-background-color: var(--main-color);
 $button-color: white;
+$button-border-color: lightgray;
 
 $button--link-color: $header-background-color;
 $button--link-background-color: white;
-$button--link-border-color: lightgray;
 
 // widget color --------------------------------------------------
 
-$widget-background-color: aliceblue;
+$widget-background-color: ghostwhite;
+
+$widget-header-background-color: aliceblue;
 
 // a color -------------------------------------------------------
 

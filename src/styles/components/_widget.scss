@@ -4,15 +4,15 @@
 }
 
 .widget-header {
-  background-color: darken($widget-background-color, 10%);
+  background-color: $widget-header-background-color;
   display: flex;
   padding: $m-size;
   justify-content: space-between;
-  border-bottom: 1px solid darken($widget-background-color, 15%);
+  border-bottom: 1px solid darken($widget-background-color, 10%);
 }
 
 .widget__message {
-  font-size: $basic-fontsize;
+  font-size: $middle-fontsize;
   text-align: center;
   padding: $s-size;
 }

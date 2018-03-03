@@ -3,7 +3,7 @@
   background-color: $button-background-color;
   padding: $s-size;
   border: none;
-  border-bottom: 0.3rem solid darken($button-background-color, 10%);
+  border-bottom: 0.3rem solid darken($button-border-color, 10%);
   border-radius: 6px;
 }
 
@@ -12,12 +12,8 @@
   font-size: $big-button-fontsize;
   padding: $m-size;
   margin-bottom: $xl-size;
-  border-bottom: 0.6rem solid darken($button-background-color, 10%);
+  border-bottom: 0.6rem solid darken($button-border-color, 10%);
   font-weight: bold;
-}
-
-.big-button:disabled {
-  opacity: 0.6;
 }
 
 @media (min-width: $desktop-breakpoint) {
@@ -28,7 +24,14 @@
 
 .button--link {
   color: $button--link-color;
-  background: $button--link-background-color;
-  border: 1px solid $button--link-border-color;
+  background-color: $button--link-background-color;
+  border: 1px solid $button-border-color;
   padding: 0.5rem;
+  // transition: color 0.36s;
+  transition: background-color 0.36s;
+}
+
+.button--link:hover {
+  color: $button--link-background-color;
+  background-color: $button--link-color;
 }

@@ -1,6 +1,7 @@
 :root {
-	--main-color: #444;
-	--light-color: lightslategrey;
+  --main-color: darkred;
+  --light-color: red;
+  // rosybrown
 }
 
 html {
@@ -26,7 +27,13 @@ body {
 }
 
 button {
-  cursor: pointer;
+  cursor: pointer; 
+  opacity: 0.7;
+  transition: opacity 0.36s;  
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 button:disabled {
