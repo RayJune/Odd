@@ -18,7 +18,7 @@
   margin: 0;
 }
 
-@media (min-width: $desktop-breakpoint) {
+@media (max-width: $desktop-breakpoint) {
   .header {
     margin-bottom: $m-size;
   }
